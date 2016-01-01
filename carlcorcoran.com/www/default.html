@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>/KICK</title>
+
+	<link type="text/css" href="css/main.css" rel="stylesheet" />
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
+
+	<script type="text/javascript" src="scripts/SKUtil.js"></script>
+	<script type="text/javascript" src="scripts/SKCMS.js"></script>
+	<script type="text/javascript" src="scripts/SKAudio.js"></script>
+	<script type="text/javascript" src="scripts/SKFakeStorage.js"></script>
+	<script src="scripts/main.js"></script>
+
+	<!-- vertex shader -->
+	<script id="vertexShader" type="x-shader/x-vertex">
+  void main() {
+    gl_Position = vec4( position, 1.0 );
+  }
+	</script>
+
+</head>
+<body>
+	<div id="glBody"></div>
+		<div id="loading">
+		</div>
+	<div id="notglBody">
+		<div id="desc">
+			<div id="mediaContainer">
+				<div id="playButton">[ play ]</div>
+				<div id="pauseButton">[ pause ]</div>
+				<div id="previousSongButton">[ &lt;&lt; ]</div>
+				<div id="nextSongButton">[ &gt;&gt; ]</div>
+				<div id="songName">[ song name ]</div>
+			</div>
+	<!-- 		<div id="taalOpties">
+				<a data-navlinkforlanguage="en-US">EN</a> |
+				<a data-navlinkforlanguage="fr-BE">FR</a> |
+				<a data-navlinkforlanguage="nl-BE">NL</a>
+			</div>
+	 -->
+<!-- 	 		<div> -->
+	<!-- 			<a data-lang="en-US" data-navlinkforpage="default">[ about us ]</a>
+				<a data-lang="nl-BE" data-navlinkforpage="default">[ over ons ]</a>
+				<a data-lang="fr-BE" data-navlinkforpage="default">[ sur nous ]</a>
+	 -->
+<!-- 				<a target="_blank" href="https://www.facebook.com/slashKICK/">[ facebook ]</a>
+				<a target="_blank" href="https://soundcloud.com/slash-kick">[ soundcloud ]</a>
+			</div>
+ -->
+ 			<div data-contentforpage="default" data-contentforlanguage="en-US" lang="en-US">
+				<p>
+				A mix of analog and digital, /KICK is 
+				an audio-visual experience from the acid funk jazz underground.
+				Live music and realtime visual effects have been composed with the effort of a worldwide collaboration
+				of composers, artists, and computer programmers.
+				/KICK is a rare gateway to the demoscene digital art community.
+				</p>
+				<br />
+				<p>
+				<a target="_blank" href="https://www.facebook.com/slashKICK/">[ facebook ]</a>
+				<a target="_blank" href="https://soundcloud.com/slash-kick">[ soundcloud ]</a>
+				</p>
+				<br />
+				<p><a href="mailto:info@slashkick.be">info@slashkick.be</a></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
