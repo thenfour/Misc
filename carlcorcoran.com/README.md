@@ -1,7 +1,7 @@
 
 
 # What is this?
-New website for /KICK, made 2015-11-28. It's compiled, using r.js optimizer. The point is to make something making good use of webgl.
+website. It's compiled, using r.js optimizer.
 
 # Build environment
 In order to launch local web server:

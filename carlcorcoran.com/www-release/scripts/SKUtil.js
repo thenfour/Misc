@@ -1,0 +1,1 @@
+var SK=SK||{};bind=function(e,t){return t.bind(e)},isCanvasSupported=function(){var e=document.createElement("canvas");return!!e.getContext&&!!e.getContext("2d")},isAudioSupported=function(){return!1;var e};

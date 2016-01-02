@@ -20,9 +20,7 @@ SK.FakeStorage = function()
 			isDefault: true,
 			pageTitle:
 			[
-				{ lang: "en-US", value: "/KICK: About" },
-				{ lang: "nl-BE", value: "/KICK: Over ons" },
-				{ lang: "fr-BE", value: "/KICK: Sur nous" }
+				{ lang: "en-US", value: "Carl Corcoran, Brussels-based Music Composer / Arranger / Producer" }
 			]
 		},
 

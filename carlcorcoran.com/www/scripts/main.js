@@ -44,9 +44,9 @@ SK.App = function()
 	};
 
 
-	(new THREE.TextureLoader(manager)).load('images/KICK.png', bind(this, function(tex){ this.kickTexture = tex; }));
-	(new THREE.TextureLoader(manager)).load('images/tenfourgradient.png', bind(this, function(tex){ this.tenfourGradientTexture = tex; }));
-	(new THREE.TextureLoader(manager)).load('images/dumbgradient.png', bind(this, function(tex){ this.dumbGradientTexture = tex; }));
+	(new THREE.TextureLoader(manager)).load('images/1890dbg.png', bind(this, function(tex){ this.logoTexture = tex; }));
+	//(new THREE.TextureLoader(manager)).load('images/tenfourgradient.png', bind(this, function(tex){ this.tenfourGradientTexture = tex; }));
+	//(new THREE.TextureLoader(manager)).load('images/dumbgradient.png', bind(this, function(tex){ this.dumbGradientTexture = tex; }));
 	//(new THREE.TextureLoader(manager)).load('images/noise.png', bind(this, function(tex){ this.noiseTexture = tex; }));
 	(new THREE.XHRLoader(manager)).load('shaders/main.glsl', bind(this, function(contents){ this.ps = contents; }));
 };
@@ -66,17 +66,17 @@ SK.App.prototype.beginGlsl = function()
   // configure textures
   //this.kickTexture
   
-  this.tenfourGradientTexture.wrapS = THREE.RepeatWrapping;
-  this.tenfourGradientTexture.wrapT = THREE.RepeatWrapping;
-  this.tenfourGradientTexture.magFilter = THREE.NearestFilter;
-  this.tenfourGradientTexture.minFilter = THREE.NearestFilter;
-  this.tenfourGradientTexture.needsUpdate = true;
+  // this.tenfourGradientTexture.wrapS = THREE.RepeatWrapping;
+  // this.tenfourGradientTexture.wrapT = THREE.RepeatWrapping;
+  // this.tenfourGradientTexture.magFilter = THREE.NearestFilter;
+  // this.tenfourGradientTexture.minFilter = THREE.NearestFilter;
+  // this.tenfourGradientTexture.needsUpdate = true;
 
-  this.dumbGradientTexture.wrapS = THREE.RepeatWrapping;
-  this.dumbGradientTexture.wrapT = THREE.RepeatWrapping;
-  this.dumbGradientTexture.magFilter = THREE.NearestFilter;
-  this.dumbGradientTexture.minFilter = THREE.NearestFilter;
-  this.dumbGradientTexture.needsUpdate = true;
+  // this.dumbGradientTexture.wrapS = THREE.RepeatWrapping;
+  // this.dumbGradientTexture.wrapT = THREE.RepeatWrapping;
+  // this.dumbGradientTexture.magFilter = THREE.NearestFilter;
+  // this.dumbGradientTexture.minFilter = THREE.NearestFilter;
+  // this.dumbGradientTexture.needsUpdate = true;
 
   // this.noiseTexture.wrapS = THREE.RepeatWrapping;
   // this.noiseTexture.wrapT = THREE.RepeatWrapping;
@@ -89,14 +89,14 @@ SK.App.prototype.beginGlsl = function()
     iMouse: { type: "v4", value: new THREE.Vector4() },
     iFFT: { type: "f", value: 0 },
 
-    kickTexture: { type: "t", value: this.kickTexture },
-    kickTextureSize: {type:"v2", value: new THREE.Vector2(this.kickTexture.image.width, this.kickTexture.image.height) },
+    logoTexture: { type: "t", value: this.logoTexture },
+    logoTextureSize: {type:"v2", value: new THREE.Vector2(this.logoTexture.image.width, this.logoTexture.image.height) },
 
-    tenfourGradientTexture: { type: "t", value: this.tenfourGradientTexture },
-    tenfourGradientTextureSize: {type:"v2", value: new THREE.Vector2(this.tenfourGradientTexture.image.width, this.tenfourGradientTexture.image.height) },
+    // tenfourGradientTexture: { type: "t", value: this.tenfourGradientTexture },
+    // tenfourGradientTextureSize: {type:"v2", value: new THREE.Vector2(this.tenfourGradientTexture.image.width, this.tenfourGradientTexture.image.height) },
 
-    dumbGradientTexture: { type: "t", value: this.dumbGradientTexture },
-    dumbGradientTextureSize: {type:"v2", value: new THREE.Vector2(this.dumbGradientTexture.image.width, this.dumbGradientTexture.image.height) },
+    // dumbGradientTexture: { type: "t", value: this.dumbGradientTexture },
+    // dumbGradientTextureSize: {type:"v2", value: new THREE.Vector2(this.dumbGradientTexture.image.width, this.dumbGradientTexture.image.height) },
 
     //noiseTexture: { type: "t", value: this.noiseTexture },
     //noiseTextureSize: {type:"v2", value: new THREE.Vector2(this.noiseTexture.image.width, this.noiseTexture.image.height) },
@@ -127,26 +127,17 @@ SK.App.prototype.uvToWindowCoords = function(uv, iResolution)
 {
 	var ret = { x : uv.x, y : uv.y };
 
-	ret.y += ret.x * .3333;
-
 	// add padding to correct aspect.
 	if(iResolution.x > iResolution.y)
 		ret.x /= iResolution.x / iResolution.y;
 	else
 		ret.y *= iResolution.x / iResolution.y;
 
-	ret.y -= -.3;
-	ret.x -= .3;
-
-	ret.x /= 2.1;
-	ret.y /= 2.1;
-
 	ret.x += .5;
-	ret.x *= iResolution.x;
-	ret.y += .5;
-	ret.y *= iResolution.y;
+	ret.y += .7;
 
-	ret.y = iResolution.y - ret.y;
+	ret.x *= iResolution.x;
+	ret.y *= iResolution.y;
 	return ret;
 };
 
@@ -159,47 +150,39 @@ SK.App.prototype.onWindowResize = function()
 	this.uniforms.iResolution.value.z = 0;
 	this.renderer.setSize(x, y);
 
-
 	// position text block.
 	var iResolution = {x:x,y:y};
 
-	var tl = this.uvToWindowCoords({ x: -.13, y: -.6}, iResolution);
-	var br = this.uvToWindowCoords({x:1.5,y:1.5}, iResolution);// ideal
+	var tl = this.uvToWindowCoords({ x: -.5, y: 0}, iResolution);
+	var br = this.uvToWindowCoords({x:.5,y:.5}, iResolution);// ideal
 
 	tl.x = Math.min(Math.max(0,tl.x), iResolution.x);
 	tl.y = Math.min(Math.max(0,tl.y), iResolution.y);
+	br.x = Math.min(Math.max(0,br.x), iResolution.x);
+	br.y = Math.min(Math.max(0,br.y), iResolution.y);
 
-	br.x = Math.min(Math.max(tl.x + 400,br.x), iResolution.x);// minimum 400 px but maximum window bounds
-	br.y = iResolution.y;
+	//br.x = Math.min(Math.max(tl.x + 400,br.x), iResolution.x);// minimum 400 px but maximum window bounds
+	//tl.y = iResolution.y / 2.;
+	//tl.x = 0;
+	//br.x = iResolution.x;
+	//br.y = iResolution.y;
 
-	var noskew = "0";
-	var skew = "skew(0,-" + Math.atan(0.33333) + "rad)";
+	//var noskew = "0";
+	//var skew = "skew(0,-" + Math.atan(0.33333) + "rad)";
 	$("#desc")
 		.css({
 			top: tl.y + "px",
 			left: tl.x + "px",
 			width: Math.abs(br.x-tl.x)+"px",
 			height: Math.abs(br.y-tl.y)+"px",
-			"-webkit-transform-origin": "0",
-			"-webkit-transform": noskew,
-			"-ms-transform-origin": "0",
-			"-ms-transform": noskew,
-			"transform-origin": "0",
-			"transform": noskew
+			// "-webkit-transform-origin": "0",
+			// "-webkit-transform": noskew,
+			// "-ms-transform-origin": "0",
+			// "-ms-transform": noskew,
+			// "transform-origin": "0",
+			// "transform": noskew
 		});
 
-	// tl = this.uvToWindowCoords({ x: -.15, y: -.6}, iResolution);
-	// $("#social")
-	// 	.css({
-	// 		top: tl.y + "px",
-	// 		left: tl.x + "px",
-	// 		"-webkit-transform-origin": "0",
-	// 		"-webkit-transform": noskew,
-	// 		"-ms-transform-origin": "0",
-	// 		"-ms-transform": noskew,
-	// 		"transform-origin": "0",
-	// 		"transform": noskew
-	// 	});
 };
 
 
