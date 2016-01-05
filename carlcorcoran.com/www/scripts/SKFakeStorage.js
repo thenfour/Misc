@@ -20,7 +20,7 @@ SK.FakeStorage = function()
 			isDefault: true,
 			pageTitle:
 			[
-				{ lang: "en-US", value: "Carl Corcoran, Brussels-based Music Composer / Arranger / Producer" }
+				{ lang: "en-US", value: "Trident Loop, Brussels-based software and creative consulting" }
 			]
 		},
 

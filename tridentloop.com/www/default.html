@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Trident Loop, Brussels-based software and creative consulting</title>
+	<meta name="description" content="Trident Loop, Brussels-based software and creative consulting" />
+	<meta name="keywords" content="Trident Loop, Brussels, software, ICT, IT, creative, music, consulting" />
+
+	<link type="text/css" href="css/main.css" rel="stylesheet" />
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
+
+	<script type="text/javascript" src="scripts/SKUtil.js"></script>
+	<script type="text/javascript" src="scripts/SKCMS.js"></script>
+	<script type="text/javascript" src="scripts/SKAudio.js"></script>
+	<script type="text/javascript" src="scripts/SKFakeStorage.js"></script>
+	<script src="scripts/main.js"></script>
+
+	<!-- vertex shader -->
+	<script id="vertexShader" type="x-shader/x-vertex">
+  void main() {
+    gl_Position = vec4( position, 1.0 );
+  }
+	</script>
+
+</head>
+<body>
+	<div id="glBody"></div>
+		<div id="loading">
+		</div>
+	<div id="notglBody">
+		<div id="desc">
+			<div id="mediaContainer">
+				<div id="playButton">[ play ]</div>
+				<div id="pauseButton">[ pause ]</div>
+				<div id="previousSongButton">[ &lt;&lt; ]</div>
+				<div id="nextSongButton">[ &gt;&gt; ]</div>
+				<div id="songName">[ song name ]</div>
+			</div>
+	<!-- 		<div id="taalOpties">
+				<a data-navlinkforlanguage="en-US">EN</a> |
+				<a data-navlinkforlanguage="fr-BE">FR</a> |
+				<a data-navlinkforlanguage="nl-BE">NL</a>
+			</div>
+	 -->
+<!-- 	 		<div> -->
+	<!-- 			<a data-lang="en-US" data-navlinkforpage="default">[ about us ]</a>
+				<a data-lang="nl-BE" data-navlinkforpage="default">[ over ons ]</a>
+				<a data-lang="fr-BE" data-navlinkforpage="default">[ sur nous ]</a>
+	 -->
+<!-- 				<a target="_blank" href="https://www.facebook.com/slashKICK/">[ facebook ]</a>
+				<a target="_blank" href="https://soundcloud.com/slash-kick">[ soundcloud ]</a>
+			</div>
+ -->
+ 			<div data-contentforpage="default" data-contentforlanguage="en-US" lang="en-US">
+				<h1>Trident Loop</h1>
+				<p>
+				Brussels-based software and creative consulting.
+				</p>
+				<br />
+				<!-- http://www.iconarchive.com/show/android-lollipop-apps-icons-by-tinylab.html -->
+				<!-- http://www.iconarchive.com/show/flat-gradient-social-icons-by-limav.1.html -->
+				<!-- <p><a target="_blank" href="https://soundcloud.com/tenfour">soundcloud/tenfour</a></p> -->
+				<!-- <p><a target="_blank" href="https://twitter.com/tenfour2">twitter/@tenfour2</a></p> -->
+				<br />
+				<p>+1 (206) 905 9883</p>
+				<p>+32 (0)499 31 57 63</p>
+				<p><a target="_blank" href="https://be.linkedin.com/in/carlcorcoran">linkedin/carlcorcoran</a></p>
+				<p><a href="mailto:carlco@gmail.com">carlco@gmail.com</a></p>
+			</div>
+		</div>
+	</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3194923-5', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+

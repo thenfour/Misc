@@ -16,16 +16,6 @@ uniform float iFFT;
 
 
 
-
-// initial inspiration:
-// http://static1.squarespace.com/static/53c9cdf3e4b0669c8d19e691/53ffa2f8e4b048b8b84fef6f/53ffa473e4b0f2e23aea116f/1409262727455/MagnetoLayer+2013-06-14-00-13-54-324.gif?format=500w
-    
-const float bandSpacing = .07;
-const float lineSize = bandSpacing * .8;
-const float segmentLength = .7;
-const float animSpeed = .3;
-
-
 highp float rand(vec2 co)
 {
     highp float a = 12.9898;
@@ -36,18 +26,6 @@ highp float rand(vec2 co)
     return fract(sin(sn) * c);
 }
 
-float rand(float n){
-    return fract(cos(n*89.42)*343.42);
-}
-float round(float x, float p)
-{
-    return floor((x+(p*.5))/p)*p;
-}
-float dtoa(float d, float amount)
-{
-    return 1.-smoothstep(-.002,.002,d);
-    //return clamp(1./(clamp(d,1./amount,1.)*amount),0.,1.);
-}
 // signed distance to segment of 1D space. like, for making a vertical column
 float sdSegment1D(float uv, float a, float b)
 {
@@ -75,55 +53,39 @@ void blit(inout vec3 o, vec2 uv, vec2 pos, vec2 destSize, vec3 color)
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
-    vec2 uv = fragCoord.xy / iResolution.xy;
-		vec4 bg = vec4(uv.xyyy) * .3;
-    uv += vec2(-.5,-.7);
-    //uv.y -=1.;
-    //uv *= .3;
-//    float distToEdge = -sdAxisAlignedRect(uv, vec2(-.5), vec2(.5)) /.5;
+  vec2 uv = fragCoord.xy / iResolution.xy;
+	fragColor = vec4(uv.xyyy) * .3;
+
+	uv -= .5;
 
 	if(iResolution.x > iResolution.y)
 		uv.x *= iResolution.x / iResolution.y;
 	else
 		uv.y /= iResolution.x / iResolution.y;
 
+	vec2 uvn = fragCoord.xy / iResolution.xy - .5;
 
-    vec2 uvLogo = uv;
-    
+  vec3 logoc = fragColor.rgb;
+  float size = 1.;
+	blit(logoc, uv, vec2(-size*.5)-vec2(0,-.2), vec2(size), vec3(1));
+	fragColor.rgb = logoc;
+  
+  //fragColor.rgb *= 1.-rand(fragCoord.xy+iGlobalTime)*.3;
 
-      vec3 logoMatte = vec3(.2,.05,.2);
-      logoMatte = vec3(1);
-  fragColor = bg;// * vec4(vec3(logoMatte * color * bandA),1) * att;
-//    fragColor = logoMatte * (fragColor.)
-		{
-			vec2 uvn = fragCoord.xy / iResolution.xy - .5;
-			vec2 uvPix = fragCoord.xy;
+  // noise method #2
+  float noiseAmt = rand(fragCoord.xy+iGlobalTime);
+  fragColor.rgb = mix(fragColor.rgb, 1.-fragColor.rgb, noiseAmt*.17);
+  fragColor.rgb = pow(fragColor.rgb, vec3(1./.8));
 
-	    vec3 logoc = fragColor.rgb;
-	    float size = 1.;
-			blit(logoc, uvLogo, vec2(-size*.5)-vec2(0), vec2(size), logoMatte);
-			fragColor.rgb = logoc;
-		  fragColor.rgb *= 1.-rand(uvPix+iGlobalTime)*.3;
-		  fragColor.rgb *= 1.-dot(uvn, uvn);
-		}
+  //float noiseMix = .15;
+  //float noiseAmt = (rand(fragCoord.xy+iGlobalTime)-.5)*noiseMix;
+  //fragColor.rgb = clamp(fragColor.rgb, 0., 1.);
+  //fragColor.rgb += noiseAmt;
 
+  fragColor.rgb = clamp(fragColor.rgb, 0., 1.);
+  fragColor.rgb *= 1.-dot(uvn*1.25, uvn*1.25);
 
-
-    //vec4 logo = texture2D(logoTexture, fragCoord.xy / iResolution.xy);
-    //fragColor = mix(fragColor, logo, logo.a);
-    //fragColor = vec4(distToEdge);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
