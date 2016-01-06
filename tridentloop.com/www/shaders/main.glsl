@@ -24,13 +24,13 @@ uniform float iFFT;
 // http://static1.squarespace.com/static/53c9cdf3e4b0669c8d19e691/53ffa2f8e4b048b8b84fef6f/53ffa473e4b0f2e23aea116f/1409262727455/MagnetoLayer+2013-06-14-00-13-54-324.gif?format=500w
     
 const float bandSpacing = .035;
-const float lineSize = 0.004;
+const float lineSize = 0.01;
 const float segmentLength = .3;
 const float animSpeed = .5;
 
 
 float rand(float n){
-    return fract(cos(n*89.42)*343.42);
+    return fract(cos(n*89.42)*343.21);
 }
 float round(float x, float p)
 {
@@ -38,7 +38,7 @@ float round(float x, float p)
 }
 float dtoa(float d)
 {
-    float aa = 6./length(iResolution.xy);
+    float aa = 3./length(iResolution.xy);
     return 1.-smoothstep(-aa, aa, d);
 }
 float sdSegment1D(float uv, float a, float b)
@@ -86,13 +86,15 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     //fragColor = vec4(1);
     fragColor = clamp(fragColor, 0., 1.);
     //fragColor *= .4;
-    fragColor.rgb = mix(fragColor.rgb, vec3((fragColor.r+fragColor.g+fragColor.b)/3.), .7);
+    fragColor.rgb = mix(fragColor.rgb, vec3((fragColor.r+fragColor.g+fragColor.b)/3.), .4);
+    //fragColor = vec4(.5);
+    //fragColor *= pow(length(uvn)*.5,1.);
     fragColor = 1.-fragColor;
-    uvn *= 1.3;
+    uvn *= .4;
     fragColor *= 1.-dot(uvn,uvn);
-    fragColor -= rand(uv.x)*.06;
+    fragColor -= rand(uv.x)*.12;
     fragColor = clamp(fragColor, 0., 1.);
-    fragColor = pow(fragColor, vec4(1./1.9));
+    fragColor = pow(fragColor, vec4(1./1.4));
     fragColor = clamp(fragColor, 0., 1.);
 }
 
